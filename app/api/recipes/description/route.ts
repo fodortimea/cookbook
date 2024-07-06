@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
       description: "This is a placeholder until the fun starts.",
     });
   } else {
-    const prompt = `In 100 characters or less explain why this recipe is exceptional. Highlight the flavors and experience without listing steps or ingredients. Be persuasive and concise. This is the recipe: ${JSON.stringify(
+    const prompt = `In exactly 2 sentences explain why this recipe is exceptional. Highlight the flavors and experience without listing steps or ingredients. Be persuasive and concise. This is the recipe: ${JSON.stringify(
         recipe
       )}. User's search criteria: ${userInput}`;      
 

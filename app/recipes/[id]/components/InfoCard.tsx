@@ -12,7 +12,9 @@ export function InfoCard({
   if (!value) return null;
   return (
     <div className="flex flex-col items-center bg-white p-4 shadow-lg w-32 h-32">
-      <img src={source} alt={altSource} className="w-12 h-12 mb-2" />
+      <picture>
+        <img src={source} alt={altSource} className="w-12 h-12 mb-2" />
+      </picture>
       <div className="text-orange-300">{title}</div>
       <div className="text-gray-600">{value}</div>
     </div>

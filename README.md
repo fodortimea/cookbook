@@ -6,7 +6,7 @@
 This Cook bBook App helps users find recipes based on ingredients, partial names, or images. It uses a custom Ollama model based on llava-llama3 for generating detailed and persuasive descriptions.
 
 ## Tech Stack
-- **Supabase**: Framework for building the web application.
+- **Next.js**: Framework for building the web application.
 - **Supabase**: Database & Edge Functions.
 - **Ollama**: Embedding generation, text generation, image recognition.
 

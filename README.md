@@ -26,7 +26,7 @@ npm install
 
 ### Create a Specific llava-llama3 Model
 
-Create a model based on llava-llama3 named as `foodie`. Specify the system propmt how you see it fit.
+Create a model based on llava-llama3 named as `foodie`. Specify the system prompt how you see it fit.
 
 ### Run the App
 

@@ -19,9 +19,10 @@ This Cook bBook App helps users find recipes based on ingredients, partial names
 
 ### Install Dependencies
 
-\`\`\`sh
+```
 npm install
-\`\`\`
+```
+
 
 ### Create a Specific llava-llama3 Model
 
@@ -29,9 +30,9 @@ Create a model based on llava-llama3 named as `foodie`. Specify the system propm
 
 ### Run the App
 
-\`\`\`sh
+```
 npm run dev
-\`\`\`
+```
 
 - Open your browser and navigate to `http://localhost:3000`.
 

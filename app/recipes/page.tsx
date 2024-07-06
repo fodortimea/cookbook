@@ -33,6 +33,7 @@ export default function Recipes() {
     const data: Result = await response.json();
     if (data) {
       setRecipes(data.recipies);
+      localStorage.setItem('describedUserInput', data.inputText);
     } else {
       console.error("Error fetching recipes:", data);
     }

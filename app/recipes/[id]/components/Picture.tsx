@@ -1,3 +1,4 @@
+import Image from "next/image";
 
 export default function Picture({
   source,
@@ -8,13 +9,15 @@ export default function Picture({
 }) {
   return (
     <div className="relative h-96 overflow-hidden">
-      <picture>
-      <img
+       <Image
         src={source}
         alt={altSource}
-        className="w-full h-full object-cover object-top"
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        priority
+        style={{ objectFit: 'cover', objectPosition: 'top' }}
+        className="rounded-lg shadow"
       />
-      </picture>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function InfoCard({
   source,
   altSource,
@@ -12,9 +14,7 @@ export function InfoCard({
   if (!value) return null;
   return (
     <div className="flex flex-col items-center bg-white p-4 shadow-lg w-32 h-32">
-      <picture>
-        <img src={source} alt={altSource} className="w-12 h-12 mb-2" />
-      </picture>
+        <Image src={source} alt={altSource} width={48} height={48} className="w-12 h-12 mb-2" />
       <div className="text-orange-300">{title}</div>
       <div className="text-gray-600">{value}</div>
     </div>

@@ -1,4 +1,4 @@
 export interface Result {
-    recipies: any[];
+    recipes: any[];
     inputText: string;
   };

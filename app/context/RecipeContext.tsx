@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useState, ReactNode, useContext } from 'react';
-import { Recipe } from '../recipes/models/Recipe';
+import { Recipe } from '../models/Recipe';
 
 interface RecipeContextType {
   formData: FormData | null;

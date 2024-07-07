@@ -8,7 +8,7 @@ import { InfoCard } from "./components/InfoCard";
 import Ingredients from "./components/Ingredients";
 import Steps from "./components/Steps";
 import { fetchDescription, fetchRecipe } from "./util/recipeUtil";
-import { Recipe } from "../models/Recipe";
+import { Recipe } from "../../models/Recipe";
 import RecipeDetailsSkeleton from "@/app/components/RecipeDetailsSkeleton";
 
 export default function RecipeDetails({ params }: { params: { id: string } }) {

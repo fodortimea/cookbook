@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { Recipe } from "./models/Recipe";
+import { Recipe } from "../models/Recipe";
 import RecipeCard from "./components/RecipeCard";
 import NoResultFound from "./components/NoResultFound";
 import { useRecipeContext } from "../context/RecipeContext";
@@ -27,10 +27,10 @@ export default function Recipes() {
     //   )}`
     // );
 
-    const data: { recipies: Recipe[]; inputText: string } =
+    const data: { recipes: Recipe[]; inputText: string } =
       await response.json();
     if (data) {
-      setRecipes(data.recipies);
+      setRecipes(data.recipes);
       localStorage.setItem("describedUserInput", data.inputText);
     } else {
       console.error("Error fetching recipes:", data);

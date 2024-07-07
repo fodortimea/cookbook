@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Recipe } from "../models/Recipe";
+import { Recipe } from "../../models/Recipe";
+import Tag from "./Tag";
 
 export default function RecipeCard({ recipe }: { recipe: Recipe }) {
   return (
@@ -12,7 +13,7 @@ export default function RecipeCard({ recipe }: { recipe: Recipe }) {
         src={recipe.imageurl}
         alt={recipe.name}
         fill
-        sizes="100vw"
+        sizes="(max-width: 768px) 100vw, 50vw"
         priority
         style={{ objectFit: "cover", objectPosition: "center" }}
         className="transform hover:scale-105 transition-transform duration-300"
@@ -26,6 +27,11 @@ export default function RecipeCard({ recipe }: { recipe: Recipe }) {
           <p className="text-gray-600">
             Cooking Time: {recipe.cooktime} minutes
           </p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {recipe.tags?.map((tag, index) => (
+              <Tag key={index} tag={tag} />
+            ))}
+          </div>
         </div>
       </div>
     </Link>

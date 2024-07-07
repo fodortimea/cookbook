@@ -1,4 +1,4 @@
-import { RecipeIngredient } from "../../models/RecipeIngredients";
+import { RecipeIngredient } from "../../../models/RecipeIngredients";
 
 export default function Ingredients({
   ingredients,

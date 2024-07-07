@@ -1,4 +1,4 @@
-import { Recipe } from "../../models/Recipe";
+import { Recipe } from "../../../models/Recipe";
 import { supabase } from "../../../../lib/supabaseClient";
 import ollama from "ollama";
 
@@ -44,6 +44,7 @@ export const fetchRecipe = async (id: string): Promise<Recipe | null> => {
         quantity: ri.quantity,
         measurement: ri.ingredient.measurement,
       })),
+      tags:[],
     };
     return transformedRecipe;
   }

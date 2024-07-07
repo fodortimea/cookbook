@@ -5,7 +5,7 @@ import { Result } from "@/app/models/Result";
 
 export async function GET(request: Request) {
   let result :Result={
-    recipies: [],
+    recipes: [],
     inputText: ''
   };
   const { searchParams } = new URL(request.url);
@@ -25,6 +25,6 @@ export async function GET(request: Request) {
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
-  result.recipies=data;
+  result.recipes=data;
   return NextResponse.json(result);
 }

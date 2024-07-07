@@ -8,4 +8,5 @@ export interface Recipe {
     serves?: number;
     description: string;
     ingredients?: RecipeIngredient[];
+    tags?: string[];
   };

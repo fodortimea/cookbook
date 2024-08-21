@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
       description: "This is a placeholder until the fun starts.",
     });
   } else {
-    const prompt = `In exactly 2 sentences explain why this recipe is exceptional. Highlight the flavors and experience without listing steps or ingredients. Be persuasive and concise. This is the recipe: ${JSON.stringify(
+    const prompt = `Write a description for a recipe in a recipe application while following these rules: In exactly 2 sentences explain why this recipe is exceptional, based on the user's search criteria. Highlight the flavors and experience without listing steps or ingredients. Be persuasive and concise, do not confirm that you understood the task. Be formal and use passive tense instead of I. This is the recipe: ${JSON.stringify(
         recipe
       )}. User's search criteria: ${userInput}`;      
 

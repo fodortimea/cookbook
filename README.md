@@ -3,7 +3,7 @@
 
 ## Overview
 
-This Cook Book App helps users find recipes based on ingredients, partial names, or images. It uses a custom Ollama model based on llava-llama3 for generating detailed and persuasive descriptions.
+This Cook Book App helps users find recipes based on ingredients, partial names, or search criteria context and images. It uses a custom Ollama model based on llava-llama3 for generating detailed and persuasive descriptions.
 
 ## Tech Stack
 - **Next.js**: Framework for building the web application.
@@ -13,20 +13,46 @@ This Cook Book App helps users find recipes based on ingredients, partial names,
 ## Prerequisites
 
 - **Node.js (v18.18 or later)**
+- **Supabase account**
 - **Ollama running locally** with the custom llava-llama model
 
 ## Setup and Installation
+
+### Set up the LLM Models
+#### **Pull the all-minilm embedding model**
+In a terminal run 
+```
+ollama run all-minilm
+```
+#### **Create a Specific llava-llama3 Multimodal Model**
+In a terminal run 
+```
+ollama run llava-llama3
+```
+Specify the system prompt to your preferences and save it as `foodie`.
 
 ### Install Dependencies
 
 ```
 npm install
 ```
+### Create the Database
+1. Create a new project in Supabase.
+2. Open the Supabase SQL Editor, and paste the content of `setup.sql` from this repository into it.
+3. Run the script.
 
+### 3. Configure Environment Variables
 
-### Create a Specific llava-llama3 Model
+1. In the root directory of your project, create a `.env.local` file.
+2. Add the following environment variables:
 
-Create a model based on llava-llama3 named as `foodie`. Specify the system prompt how you see it fit.
+```
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-url.supabase.co
+NEXT_PUBLIC_SUPABASE_KEY=your-anon-key
+```
+
+Replace `your-project-url.supabase.co` with your Supabase Project URL.
+Replace `your-anon-key` with your Supabase anon public API key.
 
 ### Run the App
 
@@ -34,5 +60,5 @@ Create a model based on llava-llama3 named as `foodie`. Specify the system promp
 npm run dev
 ```
 
-- Open your browser and navigate to `http://localhost:3000`.
+Open your browser and navigate to `http://localhost:3000`.
 

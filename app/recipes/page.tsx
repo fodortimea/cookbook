@@ -1,12 +1,10 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { Recipe } from "../models/Recipe";
 import RecipeCard from "./components/RecipeCard";
 import NoResultFound from "./components/NoResultFound";
 import { useRecipeContext } from "../context/RecipeContext";
-import { Result } from "../models/Result";
 import RecipeSkeletonCard from "./components/RecipeSkeletonCard";
 
 export default function Recipes() {

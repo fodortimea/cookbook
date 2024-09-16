@@ -11,7 +11,7 @@ import { fetchDescription, fetchRecipe } from "./util/recipeUtil";
 import { Recipe } from "../../models/Recipe";
 import RecipeDetailsSkeleton from "@/app/components/RecipeDetailsSkeleton";
 
-export default function RecipeDetails({ params }: { params: { id: string } }) {
+export default function RecipeDetails({ params }: Readonly<{ params: { id: string } }>) {
   const { id } = params;
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [description, setDescription] = useState<string>("");

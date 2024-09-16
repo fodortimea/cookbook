@@ -56,9 +56,9 @@ export async function POST(request: NextRequest) {
       data.map(async (recipe: Recipe) => {
         const generateTags = await ollama.generate({
           model: "foodie",
-          prompt: `Generate exactly 3 tags for this recipe: ${JSON.stringify(
+          prompt: `Generate exactly 3 tags that represent this recipe: ${JSON.stringify(
             recipe
-          )}, separated by comma`,
+          )}, separated by comma. Do not use # for the tags. The 3 tags should not be ingredients of the recipe, and also not part of the name of the recipe.`,
         });
 
         const tags = generateTags.response.split(",").map((tag) => tag.trim());

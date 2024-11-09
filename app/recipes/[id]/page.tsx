@@ -14,30 +14,42 @@ import RecipeDetailsSkeleton from "@/app/components/RecipeDetailsSkeleton";
 export default function RecipeDetails({ params }: Readonly<{ params: { id: string } }>) {
   const { id } = params;
   const [recipe, setRecipe] = useState<Recipe | null>(null);
-  const [description, setDescription] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (id) {
-      fetchRecipe(id)
-        .then((fetchedRecipe) => {
-          setRecipe(fetchedRecipe);
-          if (fetchedRecipe) {
-            return fetchDescription(fetchedRecipe);
-          } else {
-            return "Something went wrong with fetching the recipe...";
+      // Retrieve values from localStorage
+      const describedUserInput = localStorage.getItem('describedUserInput') || '';
+      const recommendedFor = localStorage.getItem('recommendedFor') || '';
+      const isGraph = localStorage.getItem('isGraph') === 'true';
+
+      // Make the fetch request and send the values to the server
+      fetch(`/api/recipes/${id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          describedUserInput,
+          recommendedFor,
+          isGraph
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            throw new Error(data.error);
           }
+          setRecipe(data.detailedRecipe);
         })
-        .then((desc) => setDescription(desc))
         .catch((error) => {
-          console.error("Error generating data:", error);
-          setDescription("Error while generating description");
+          console.error('Error generating data:', error);
         })
         .finally(() => {
           setLoading(false);
         });
     }
-  }, [id]);
+  }, [id]);  
 
   if (loading) return <RecipeDetailsSkeleton />;
   if (!recipe) return <p>Recipe not found</p>;
@@ -54,7 +66,7 @@ export default function RecipeDetails({ params }: Readonly<{ params: { id: strin
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex flex-col justify-start">
                 <Title name={recipe.name} />
-                <Description description={description} />
+                <Description description={recipe.generatedDescription} />
               </div>
               <Picture source={recipe.imageurl} altSource={recipe.name} />
             </div>

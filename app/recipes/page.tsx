@@ -14,10 +14,15 @@ export default function Recipes() {
   const fetchRecipes = useCallback(async () => {
     if (!formData) return;
 
-    const response = await fetch("/api/recipes/rag", {
+    const response = await fetch("/api/recipes/rag/graph", {
       method: "POST",
       body: formData,
     });
+
+    // const response = await fetch("/api/recipes/rag", {
+    //   method: "POST",
+    //   body: formData,
+    // });
 
     // const response = await fetch(
     //   `/api/recipes?search=${encodeURIComponent(
@@ -25,11 +30,13 @@ export default function Recipes() {
     //   )}`
     // );
 
-    const data: { recipes: Recipe[]; inputText: string } =
+    localStorage.setItem("isGraph", String(false));
+    const data: { recipes: Recipe[]; inputText: string, recommendedFor: string} =
       await response.json();
     if (data) {
       setRecipes(data.recipes);
       localStorage.setItem("describedUserInput", data.inputText);
+      localStorage.setItem("recommendedFor", data.recommendedFor);
     } else {
       console.error("Error fetching recipes:", data);
     }

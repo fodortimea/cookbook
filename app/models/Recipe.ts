@@ -5,8 +5,10 @@ export interface Recipe {
     name: string;
     imageurl: string;
     cooktime: number;
+    cusine?: string;
     serves?: number;
     description: string;
     ingredients?: RecipeIngredient[];
     tags?: string[];
+    generatedDescription?: string;
   };

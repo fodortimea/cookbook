@@ -1,8 +1,50 @@
 import { Recipe } from "../../../models/Recipe";
 import { supabase } from "../../../../lib/supabaseClient";
 import ollama from "ollama";
+//import { getSession } from "@/lib/neo4j";
 
 export const fetchRecipe = async (id: string): Promise<Recipe | null> => {
+  const isGraph = localStorage.getItem('isGraph') === 'true';
+  if (isGraph) {
+    return fetchRecipeFromGraph(id);
+  } else {
+    return fetchRecipeFromRelationalDB(id);
+  }
+};
+
+//TODO make route for this!
+
+const fetchRecipeFromGraph = async (id: string): Promise<Recipe | null> => {
+  // const session = getSession();
+  // const query = `
+  //   MATCH (r:Recipe {id: $id})-[:CONTAINS]->(i:Ingredient)
+  //   RETURN r, collect(i) AS ingredients
+  // `;
+  // const result = await session.run(query, { id });
+
+  // const recipeRecord = result.records[0];
+  // const recipe = recipeRecord.get('r');
+  // const ingredients = recipeRecord.get('ingredients');
+
+  // return {
+  //   id: recipe.properties.id,
+  //   name: recipe.properties.name,
+  //   imageurl: recipe.properties.imageUrl,
+  //   cooktime: recipe.properties.cookTime,
+  //   serves: recipe.properties.serves,
+  //   description: recipe.properties.description,
+  //   ingredients: ingredients.map((i: any) => ({
+  //     id: i.properties.id,
+  //     name: i.properties.name,
+  //     measurement: i.properties.measurement,
+  //     quantity: i.properties.quantity,
+  //   })),
+  //   tags: [],
+  // };
+  return null;
+};
+
+ const fetchRecipeFromRelationalDB = async (id: string): Promise<Recipe | null> => {
   const { data, error } = await supabase
     .from("recipes")
     .select(
@@ -55,6 +97,7 @@ export const fetchDescription = async (fetchedRecipe: Recipe): Promise<string> =
   try {
     if (fetchedRecipe) {
       const describedUserInput = localStorage.getItem('describedUserInput') || '';
+      const recommendedFor = localStorage.getItem('recommendedFor') || '';
       const response = await fetch('/api/recipes/description', {
         method: 'POST',
         headers: {
@@ -63,6 +106,7 @@ export const fetchDescription = async (fetchedRecipe: Recipe): Promise<string> =
         body: JSON.stringify({
           userInput: describedUserInput,
           recipe: fetchedRecipe,
+          recommendedFor
         }),
       });
       const data = await response.json();

@@ -6,7 +6,8 @@ import { Result } from "@/app/models/Result";
 export async function GET(request: Request) {
   let result :Result={
     recipes: [],
-    inputText: ''
+    inputText: '',
+    recommendedFor: ''
   };
   const { searchParams } = new URL(request.url);
   const searchInputParam = searchParams.get('search');

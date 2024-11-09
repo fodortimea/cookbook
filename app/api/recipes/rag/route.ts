@@ -40,6 +40,12 @@ export async function POST(request: NextRequest) {
       prompt: messagetoEmbed,
     });
 
+
+    // const embeddingsResponse = await ollama.embeddings({
+    //   model: "nomic-embed-text",
+    //   prompt: messagetoEmbed,
+    // });
+
     const embeddedMessage = embeddingsResponse.embedding;
 
     const { data, error } = await supabase.rpc("match_recipies", {
@@ -58,7 +64,7 @@ export async function POST(request: NextRequest) {
           model: "foodie",
           prompt: `Generate exactly 3 tags that represent this recipe: ${JSON.stringify(
             recipe
-          )}, separated by comma. Do not use # for the tags. The 3 tags should not be ingredients of the recipe, and also not part of the name of the recipe.`,
+          )}, separated by comma. Do not use # for the tags. The 3 tags should not be ingredients of the recipes.`,
         });
 
         const tags = generateTags.response.split(",").map((tag) => tag.trim());
@@ -70,6 +76,7 @@ export async function POST(request: NextRequest) {
     const result: Result = {
       recipes: detailedRecipes,
       inputText: messagetoEmbed,
+      recommendedFor: null
     };
     return NextResponse.json(result);
   } catch (error) {

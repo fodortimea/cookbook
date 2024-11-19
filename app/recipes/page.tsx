@@ -30,7 +30,7 @@ export default function Recipes() {
     //   )}`
     // );
 
-    localStorage.setItem("isGraph", String(false));
+    localStorage.setItem("isGraph", String(true));
     const data: { recipes: Recipe[]; inputText: string, recommendedFor: string} =
       await response.json();
     if (data) {

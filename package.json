@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.43.5",
+    "cookbook": "file:",
     "neo4j-driver": "^5.25.0",
-    "next": "14.2.4",
+    "next": "^14.2.17",
     "ollama": "^0.5.2",
     "react": "^18",
     "react-dom": "^18"

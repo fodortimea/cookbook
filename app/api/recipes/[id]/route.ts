@@ -73,7 +73,7 @@ const fetchRecipeFromGraph = async (id: number): Promise<Recipe | null> => {
         id: i.properties.id,
       name: i.properties.name,
       measurement: i.properties.measurement,
-      quantity: relationships[index].properties.quantity.toNumber(),
+      quantity: relationships[index].properties.quantity,
     })),
     tags: [],
   };

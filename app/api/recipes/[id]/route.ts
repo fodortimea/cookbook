@@ -70,7 +70,7 @@ const fetchRecipeFromGraph = async (id: number): Promise<Recipe | null> => {
     serves: recipe.properties.serves.toNumber(),
     description: recipe.properties.description,
     ingredients: ingredients.map((i: any, index: number) => ({
-        id: i.properties.id,
+      id: i.properties.id,
       name: i.properties.name,
       measurement: i.properties.measurement,
       quantity: relationships[index].properties.quantity,
@@ -161,9 +161,9 @@ async function getPersonRelationships(
       MATCH (p:Person {name: $recommendedFor})-[:LOVES]->(lovedRecipes:Recipe)
       OPTIONAL MATCH (p)-[:HATES]->(hatedRecipes:Recipe)
       OPTIONAL MATCH (p)-[:IS_ALLERGIC_TO]->(allergicIngredients:Ingredient)
-      RETURN collect(lovedRecipes.name) AS lovedRecipes,
-             collect(hatedRecipes.name) AS hatedRecipes,
-             collect(allergicIngredients.name) AS allergicIngredients;
+      RETURN collect(DISTINCT lovedRecipes.name) AS lovedRecipes,
+       collect(DISTINCT hatedRecipes.name) AS hatedRecipes,
+       collect(DISTINCT allergicIngredients.name) AS allergicIngredients;
       `,
     { recommendedFor }
   );
@@ -181,7 +181,8 @@ function buildLLMPrompt(
   let prompt = `Write a description for a recipe in a recipe application while following these rules: 
     In exactly 2 sentences explain why this recipe is exceptional, based on the user's search criteria. 
     Highlight the flavors and experience without listing steps or ingredients. Be persuasive and concise, do not confirm that you understood the task. 
-    Be formal and use passive tense instead of I. This is the recipe: ${JSON.stringify(
+    Be formal and use passive tense instead of I. If the recipe contains ingredients that the user is allergic to, state that the recipe is unsuitable for the user and do not describe its qualities.
+    This is the recipe: ${JSON.stringify(
       recipe
     )}. User's search criteria: ${userInput}`;
 
